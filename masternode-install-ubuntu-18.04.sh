@@ -2,19 +2,19 @@
 #!/bin/bash
 
 TMP_FOLDER=$(mktemp -d)
-CONFIG_FILE='catscoin.conf'
-CONFIGFOLDER='/root/.catscoin'
-COIN_DAEMON='catscoind'
-COIN_CLI='catscoin-cli'
-COIN_TX='catscoin-tx'
+CONFIG_FILE='opalcoin.conf'
+CONFIGFOLDER='/root/.opalcoin'
+COIN_DAEMON='opalcoind'
+COIN_CLI='opalcoin-cli'
+COIN_TX='opalcoin-tx'
 COIN_PATH='/usr/local/bin/'
 OS_VERSION=$(lsb_release -d)
 COIN_TGZP='https://github.com/opalcoinnet/opalcoin/releases/download/v2000/Opalcoin-Linux18.zip'
 COIN_BOOTSTRAP='https://github.com/opalcoinnet/opalcoin/releases/download/v2000/Bootstrap.zip'
 COIN_BOOTSTRAP_NAME=$(echo $COIN_BOOTSTRAP | awk -F'/' '{print $NF}')
 COIN_TGZ=$(echo $COIN_TGZP | awk -F'/' '{print $NF}')
-COIN_NAME='catscoin'
-COIN_NAME_OLD='catscoind'
+COIN_NAME='opalcoin'
+COIN_NAME_OLD='opalcoind'
 PROJECT_NAME='opalcoin (AUOP)'
 COIN_EXPLORER='http://104.238.182.169:3001/'
 COIN_PORT=22878
@@ -384,31 +384,31 @@ clear
 }
 
 function set_scripts_and_aliases() {
-cat << EOF > /root/catscoin-general-info
+cat << EOF > /root/opalcoin-general-info
 echo -e "\n\n${BLUE}=======================================================================================================${NC}\n"
 echo -e "${GREEN}$PROJECT_NAME General Info: ${NC}"
 $COIN_CLI getinfo
 echo -e "\n${BLUE}=======================================================================================================${NC}\n"
 EOF
-chmod +x /root/catscoin-general-info
+chmod +x /root/opalcoin-general-info
 
-cat << EOF > /root/catscoin-fee-info
+cat << EOF > /root/opalcoin-fee-info
 echo -e "\n\n${BLUE}=======================================================================================================${NC}\n"
 echo -e "${GREEN}$PROJECT_NAME Fee Info: ${NC}"
 $COIN_CLI getfeeinfo 100
 echo -e "\n${BLUE}=======================================================================================================${NC}\n"
 EOF
-chmod +x /root/catscoin-fee-info
+chmod +x /root/opalcoin-fee-info
 
-cat << EOF > /root/catscoin-networkinfo
+cat << EOF > /root/opalcoin-networkinfo
 echo -e "\n\n${BLUE}=======================================================================================================${NC}\n"
 echo -e "${GREEN}$PROJECT_NAME Network Info: ${NC}"
 $COIN_CLI getnetworkinfo
 echo -e "\n${BLUE}=======================================================================================================${NC}\n"
 EOF
-chmod +x /root/catscoin-networkinfo
+chmod +x /root/opalcoin-networkinfo
 
-cat << EOF > /root/catscoin-masternode-stats
+cat << EOF > /root/opalcoin-masternode-stats
 echo -e "\n\n${BLUE}=======================================================================================================${NC}\n"
 echo -e "${GREEN}Last Block: ${NC}"
 $COIN_CLI getblockcount
@@ -418,15 +418,15 @@ echo -e "\n${GREEN}Masternode Status: ${NC}"
 $COIN_CLI getmasternodestatus
 echo -e "\n${BLUE}=======================================================================================================${NC}\n"
 EOF
-chmod +x /root/catscoin-masternode-stats
+chmod +x /root/opalcoin-masternode-stats
 
 cp /root/.bashrc /root/.bashrc.backup
 sed '/feestats/d' /root/.bashrc | sed '/networkstats/d' | sed '/mnstats/d' | sed '/sapinfo/d' > /root/tmp
 mv /root/tmp /root/.bashrc
-echo -e "alias catscoininfo='/root/catscoin-general-info'" >> /root/.bashrc
-echo -e "alias feestats='/root/catscoin-fee-info'" >> /root/.bashrc
-echo -e "alias networkstats='/root/catscoin-networkinfo'" >> /root/.bashrc
-echo -e "alias mnstats='/root/catscoin-masternode-stats'" >> /root/.bashrc
+echo -e "alias opalcoininfo='/root/opalcoin-general-info'" >> /root/.bashrc
+echo -e "alias feestats='/root/opalcoin-fee-info'" >> /root/.bashrc
+echo -e "alias networkstats='/root/opalcoin-networkinfo'" >> /root/.bashrc
+echo -e "alias mnstats='/root/opalcoin-masternode-stats'" >> /root/.bashrc
 exec bash
 }
 
@@ -445,7 +445,7 @@ function important_information() {
  echo -e "Use ${RED}$COIN_CLI getmasternodestatus${NC} to check your MN Status."
  echo -e "Use ${RED}$COIN_CLI mnsync status${NC} to see if the node is synced with the network."
  echo -e "Use ${RED}$COIN_CLI help${NC} for help."
- echo -e "You can also use ${RED}catscoin-cli getinfo${NC}, ${RED}catscoin-cli getnetworkinfo${NC}, ${RED}catscoin-cli getconnectioncount${NC}commands for a nice looking infos.${NC}"
+ echo -e "You can also use ${RED}opalcoin-cli getinfo${NC}, ${RED}opalcoin-cli getnetworkinfo${NC}, ${RED}opalcoin-cli getconnectioncount${NC}commands for a nice looking infos.${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
 # if [[ -n $SENTINEL_REPO  ]]; then
 #  echo -e "${RED}Sentinel${NC} is installed in ${RED}/root/sentinel_$COIN_NAME${NC}"
